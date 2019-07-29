@@ -142,12 +142,19 @@ int getVEC (char* vector_file, int** VEC) {
 }
 
 int calculate(int N, double** PROD, int* VEC, int* PTR, double* VAL, int* COL) {
-#pragma omp parallel for
-  for (int i = 0; i < N; i++) {               // <-- NULL array
-    for (int j = PTR[i]; j < PTR[i + 1]; j++) {
-      (*PROD)[i] = (*PROD)[i] + (VAL[j] * VEC[COL[j]]);
-      //(*PROD)[i] = (*PROD)[i] + (VAL[j]);
+  *PROD = (double*) malloc(N * sizeof(double));
+#pragma omp parallel
+#pragma omp for
+  for (int i = 0; i < 1000; i++) {
+    for (int k = 0; k < N; k++) {
+      (*PROD)[k] = 0.0;
+    }
+    for (int i = 0; i < N; i++) {               // <-- NULL array
+      for (int j = PTR[i]; j < PTR[i + 1]; j++) {
+	(*PROD)[i] = (*PROD)[i] + (VAL[j] * VEC[COL[j]]);
+	//(*PROD)[i] = (*PROD)[i] + (VAL[j]);
 
+      }
     }
   }
 
@@ -181,22 +188,15 @@ int main (int argc, char** argv) {
   
   PROD = (double*) malloc(N * sizeof(double));         //allocate PROD
   //-------timer start---------
-  //time(&start);
   start = clock();
-  
-  for (int k = 0; k < N; k++) {
-    PROD[k] = 0.0;
-  }
 
-  for (int i = 0; i < rep; i++) {
-    calculate(N, &PROD, VEC, PTR, VAL, COL);
-    for (int k = 0; k < N; k++) {
-      PROD[k] = 0.0;
-    }
-  }
+  //for (int i = 0; i < rep; i++) {
+  //for (int k = 0; k < N; k++) {
+  //PROD[k] = 0.0;
+  //}
   calculate(N, &PROD, VEC, PTR, VAL, COL);
+    //}
   
-  //time(&end);
   end = clock();
   total_time = ((double)(end - start))/CLOCKS_PER_SEC;
   //-------timer end------------
@@ -205,7 +205,7 @@ int main (int argc, char** argv) {
     printf("%.2f\n", PROD[i]);
   }
 
-  printf("runtime: %f sec \n", total_time/rep);
+  printf("runtime: %f sec \n", total_time/1000);
 
   if (VAL)
     free(VAL);
