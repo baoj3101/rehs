@@ -16,14 +16,15 @@ CALLING FUNCTIONS:
 
 ***file path example for matrix - ../data/matrix
 
-./CRS.py --input ../data/matrix   (output file is written in ../data/matrix.out)
-./CRS_random.py --input ../data/matrix   (output file is written in ../data/matrix.out)     ***(randomized)
+1) ./CRS.py --input ../data/matrix   (output file is written in ../data/matrix.out)
+   **OR
+   ./CRS_random.py --input ../data/matrix   (output file is written in ../data/matrix.out)     ***(randomized)
 
-./VEC.py --input ../data/matrix   (output file is written in ../data/matrix/vector)
+2) ./VEC.py --input ../data/matrix   (output file is written in ../data/matrix/vector)
 
 
-gcc -openmp -o execute ./spmv_timer.c   (compile spmv code)
-./execute ../data/matrix.out ../data/matrix.vector
+3) gcc -openmp -o execute ./spmv_timer.c   (compile spmv code)
+   ./execute ../data/matrix.out ../data/matrix.vector
 
 
 
