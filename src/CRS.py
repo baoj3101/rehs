@@ -96,5 +96,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
   
     matrix = readInput(args.input)
-    debug(matrix)
+    #debug(matrix)
     storeData(matrix, args.input + ".out")
