@@ -153,11 +153,9 @@ int calculate(int N, double** PROD, int* VEC, int* PTR, double* VAL, int* COL) {
       for (int j = PTR[i]; j < PTR[i + 1]; j++) {
 	(*PROD)[i] = (*PROD)[i] + (VAL[j] * VEC[COL[j]]);
 	//(*PROD)[i] = (*PROD)[i] + (VAL[j]);
-
       }
     }
   }
-
   return 0;
 }
 
