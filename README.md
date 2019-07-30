@@ -23,7 +23,7 @@ CALLING FUNCTIONS:
 2) ./VEC.py --input ../data/matrix   (output file is written in ../data/matrix/vector)
 
 
-3) gcc -openmp -o execute ./spmv_timer.c   (compile spmv code)
+3) gcc -fopenmp -o execute ./spmv_timer.c   (compile spmv code)
    ./execute ../data/matrix.out ../data/matrix.vector
 
 
